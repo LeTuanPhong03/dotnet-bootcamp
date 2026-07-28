@@ -53,7 +53,7 @@ public class Employee
         {
             if (value < 0)
             {
-                throw new ArgumentOutOfRangeException("Base salary cannot be negative.", nameof(value));
+                throw new ArgumentOutOfRangeException( nameof(value), "Base salary cannot be negative.");
             }
 
             baseSalary = value;
@@ -65,7 +65,7 @@ public class Employee
         get => hireDate;
         set
         {
-        if (value > DateTime.Now)
+        if (value > DateTime.Today)
         {
             throw new ArgumentException("Hire date cannot be in the future.", nameof(value));
         }

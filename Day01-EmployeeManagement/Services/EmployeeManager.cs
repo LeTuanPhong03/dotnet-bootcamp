@@ -13,10 +13,6 @@ public class EmployeeManager
             Employee employee = new Employee(fullName, email, baseSalary, hireDate);
             employees.Add(employee);
         }
-        catch (ArgumentOutOfRangeException ex)
-        {
-            Console.WriteLine($"Failed to add employee '{fullName}': {ex.Message}");
-        }
         catch (ArgumentException ex)
         {
             Console.WriteLine($"Failed to add employee '{fullName}': {ex.Message}");
@@ -45,7 +41,7 @@ public class EmployeeManager
     {
         foreach (var employee in employees)
         {
-            Console.WriteLine(employee.ToString());
+            Console.WriteLine(employee);
         }
     }
 }
