@@ -1,7 +1,7 @@
-
+using Day02.Interfaces;
 namespace EmployeeManagementApp.Models;
 
-public class Employee
+public abstract class Employee : ISalaryCalculator
 {
     private static int nextId = 1;
     public int Id { get; }
@@ -45,20 +45,6 @@ public class Employee
         }
     }
 
-    private decimal baseSalary;
-    public decimal BaseSalary
-    {
-        get => baseSalary;
-        set
-        {
-            if (value < 0)
-            {
-                throw new ArgumentException("Base salary cannot be negative.", nameof(value));
-            }
-
-            baseSalary = value;
-        }
-    }
     private DateTime hireDate;
     public DateTime HireDate
     {
@@ -72,19 +58,24 @@ public class Employee
         hireDate = value;
         }
     }
-    public Employee(string fullName, string email, decimal baseSalary, DateTime hireDate)
+    public abstract string EmployeeType { get; }
+    public Employee(string fullName, string email, DateTime hireDate)
     {
         Id = nextId++;
         FullName = fullName;
         Email = email;
-        BaseSalary = baseSalary;
         HireDate = hireDate;
     }
 
-    public decimal CalculateAnnualSalary() => BaseSalary * 12;
 
+    public abstract decimal CalculateMonthlySalary();
+
+    public decimal CalculateAnnualSalary()
+    {
+        return CalculateMonthlySalary() * 12;
+    }
     public override string ToString()
     {
-        return $"[{Id}] {FullName} - {Email} - {BaseSalary:C}/month";
+        return $"[{Id}] {FullName} - {Email} - Loại: {EmployeeType} - Lương/tháng: {CalculateMonthlySalary():C}/month";
     }
 }
