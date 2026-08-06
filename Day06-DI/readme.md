@@ -1,0 +1,5 @@
+# (1) Bạn chọn lifetime gì cho từng service, giải thích ngắn vì sao (không chép định nghĩa Singleton/Scoped/Transient, giải thích theo đúng lý do nghiệp vụ của từng class).
+- các service mà cần giữ lại dùng như IRepository<Employee>,... dùng addsingleton. Lý do vì nó chỉ nên được tạo 1 lần, nếu mỗi lần dùng lại tạo mới thì danh sách nhân viên cũ sẽ mất.
+-các service còn lại chỉ khởi tạo nên dùng trasiten vì khởi tạo mới cũng không ảnh hưởng đến danh sách nhân viên,...
+# (2) Nếu lỡ đăng ký IRepository<Employee> là Transient thay vì lifetime đúng, chuyện gì sẽ xảy ra khi EmployeeManager thêm 1 Employee rồi gọi EmployeeReportService để đếm — dựa trên hiểu biết, không cần chạy thử.
+=> xảy ra việc mỗi lần gọi IRepository<Employee> là khởi tạo mới instance => nhân viên cũ mất, chỉ có nhân viên mới thêm vào danh sách.
